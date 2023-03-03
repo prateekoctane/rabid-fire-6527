@@ -1,0 +1,64 @@
+.main-section {
+    width: 100%;
+    height: 100vh;
+    margin: auto;
+    border: 2px solid red;
+    background-color: blueviolet;
+}
+.main-section> h1{
+    font-size: larger;
+    font-weight: bolder;
+    margin-top: 10px;
+}
+
+.game-section {
+    width: 90%;
+    height: 80vh;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 5%;
+    border: 5px solid black;
+    background-color: rgb(197, 78, 78);
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+.divider {
+    width: 45%;
+    height: 70vh;
+    border: 5px solid black;
+    background-color: brown;
+    border-radius: 5%;
+    margin: auto;
+    align-items: center;
+
+}
+
+.team-name {
+    margin: auto;
+    /* border: 2px solid yellow; */
+    align-items: center;
+    margin-top: 40%;
+    position: relative;
+    
+}
+
+.h3 {
+    width: fit-content;
+    height: fit-content;
+    border: 3px solid black;
+    margin: auto;
+    text-align: center;
+    position: relative;
+    animation-name: updown;
+    animation-duration: 2s;
+    animation-delay: 2s;
+}
+@keyframes updown {
+    0%   {background-color:red; left:0px; top:0px;}
+    25%  {background-color:yellow; left:0px; top:200px;}
+    50%  {background-color:blue; left:0px; bottom:0px;}
+    75%  {background-color:green; left:0px; bottom:200px;}
+    100% {background-color:red; left:0px; bottom:0px;}
+  }
