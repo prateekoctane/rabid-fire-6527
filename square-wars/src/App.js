@@ -6,7 +6,7 @@ import AllRoutes from './routes/AllRoutes';
 
 import Moveable from './Components/Moveable';
 
-import Game from './component/Game';
+// import Game from './component/Game';
 
 
 
@@ -19,7 +19,7 @@ function App() {
 
       <Moveable />
 
-    <Game />
+    {/* <Game /> */}
 
 
     </div>
