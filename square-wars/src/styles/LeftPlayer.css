@@ -1,0 +1,28 @@
+/* :root{
+    --pos: 0px;
+} */
+
+.up{
+    position: relative;
+    animation-name: upward;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+.down{
+    position: relative;
+    animation-name: downward;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes upward {
+    from  {background-color:red; bottom:0px;}
+    to {background-color:yellow;  bottom:50px;}
+   
+}
+
+@keyframes downward {
+    from   {background-color:red; top:0px;}
+    to {background-color:yellow;  top:50px;}
+   
+}
