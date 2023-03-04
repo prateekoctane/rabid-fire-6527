@@ -6,7 +6,7 @@ Team Member:-
 - Rittik Haldar
 - Prateek Bhattacharya
 - Saurav Mallik
-- Omeshu Dubey
+- Omesh Dubey
 
 used language:-
 - React
