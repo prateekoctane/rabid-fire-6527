@@ -1,19 +1,40 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
 
 
-export function BulletRight() {
-  
+export function BulletRight(props) {
+
+  const { getPositionBulletRight } = props;
+
   const [visible, setVisible] = useState("none");
   const [doAnimate, setDoAnimate] = useState(false);
   const [key, setKey] = useState(0);
+  const boxRef = useRef(null);
 
-  
+  let animationFrameId;
+
+
+
+  function updateBoxPosition() {
+
+    if (boxRef.current) {
+      let boxRect = boxRef.current.getBoundingClientRect();
+      // console.log(boxRect.left,boxRect.right," bullet position ");
+      let a = boxRect;
+      // console.log(a," a")
+      getPositionBulletRight(a)
+    }
+
+    animationFrameId = requestAnimationFrame(updateBoxPosition);
+
+  }
+
   function handleKeyDown(e) {
     if (e.code === "ArrowRight") {
       setDoAnimate(true);
       setVisible("normal");
       setKey(key + 1);
+      updateBoxPosition();
     }
   }
   // console.log("visible",visible)
@@ -22,10 +43,10 @@ export function BulletRight() {
     // document.getElementById("bulletRight").style.backGround = "red";
 
     setTimeout(() => {
-        
-        if(visible === "normal"){
-            setVisible("none")
-          }
+
+      if (visible === "normal") {
+        setVisible("none")
+      }
     }, 1100);
 
     document.addEventListener("keyup", handleKeyDown);
@@ -35,7 +56,14 @@ export function BulletRight() {
 
   }, [key]);
 
-  return <Box id="bulletRight" visible={visible} animate={doAnimate} key={key}/>;
+  useEffect(() => {
+    if (visible === "none") {
+      cancelAnimationFrame(animationFrameId);
+      // console.log("cancelled");
+    }
+  }, [visible]);
+
+  return <Box ref={boxRef} id="bulletRight" visible={visible} animate={doAnimate} key={key} />;
 }
 
 const moveLeft = keyframes`

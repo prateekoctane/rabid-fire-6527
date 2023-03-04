@@ -2,15 +2,22 @@ import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import styles from "../styles/LeftPlayer.css";
 
-export function LeftPlayer() {
+export function LeftPlayer(props) {
+
+  const {getPositionLeftPlyr} = props;
   const [position, setPosition] = useState(350);
 
   useEffect(() => {
+
     document.addEventListener("keydown", handleMove);
+    let leftDiv = document.getElementById("ritPlyr");
+        let leftRect = leftDiv.getBoundingClientRect();
+        getPositionLeftPlyr(leftRect);
+        
     return () => {
       document.removeEventListener("keydown", handleMove);
     };
-  }, []);
+  }, [position]);
 
   function handleMove(e) {
     let lef = document.getElementById("left");
