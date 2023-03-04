@@ -13,44 +13,45 @@ import {
     AlertDialogOverlay,
     useDisclosure,
     Button
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
+import {Position }from "./constant";
 
 
-
-export function Body() {
+ 
+export function Body():JSX.Element {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const cancelRef = useRef()
-    const [rp, setRp] = useState({});
-    const [lb, setLb] = useState({});
+    const cancelRef = useRef<HTMLButtonElement|null>(null)
+    const [rp, setRp] = useState<Position>({left: 0, right: 0, top: 0, bottom: 0});
+    const [lb, setLb] = useState<Position>({left: 0, right: 0, top: 0, bottom: 0});
 
-    const [lp, setLp] = useState({});
-    const [rb, setRb] = useState({});
-    const [blastRight, setBlastRight] = useState("none");
-    const [blastLeft, setBlastLeft] = useState("none");
-    const [showAlert,setShowAlert] = useState(false);
-    const [plyr,setPlyr] = useState("")
+    const [lp, setLp] = useState<Position>({left: 0, right: 0, top: 0, bottom: 0});
+    const [rb, setRb] = useState<Position>({left: 0, right: 0, top: 0, bottom: 0});
+    const [blastRight, setBlastRight] = useState<string>("none");
+    const [blastLeft, setBlastLeft] = useState<string>("none");
+    const [showAlert,setShowAlert] = useState<boolean>(false);
+    const [plyr,setPlyr] = useState<string>("")
 
 
 
-    function getPositionRitPlyr(val) {
+    function getPositionRitPlyr(val:Position) {
 
         setRp(val);
     }
     // // console.log(rp,"right player")
 
-    function getPositionBulletLeft(val) {
+    function getPositionBulletLeft(val:Position) {
 
         setLb(val)
     }
 
-    function getPositionLeftPlyr(val) {
+    function getPositionLeftPlyr(val:Position) {
 
         setLp(val);
     }
     // console.log(rp,"right player")
 
-    function getPositionBulletRight(val) {
+    function getPositionBulletRight(val:Position) {
 
         setRb(val)
     }
@@ -59,6 +60,8 @@ export function Body() {
     // console.log(lb,"leftbutllet")
 
     useEffect(() => {
+
+        
         if (lb.left < rp.right &&
             lb.right > rp.left &&
             lb.top < rp.bottom &&

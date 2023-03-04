@@ -7,7 +7,7 @@
 
     useEffect(() =>{
 
-         function keyDownFun(e){
+         function keyDownFun(e:KeyboardEvent){
             const move = 10;
             if(e.code === 'ArrowRight'){
 

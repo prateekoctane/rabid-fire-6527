@@ -1,17 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
+import {Position }from "./constant";
 
-
-export function BulletRight(props) {
+type Props = {
+  getPositionBulletRight: (a: Position) => void;
+};
+export function BulletRight(props:Props) {
 
   const { getPositionBulletRight } = props;
 
   const [visible, setVisible] = useState("none");
   const [doAnimate, setDoAnimate] = useState(false);
   const [key, setKey] = useState(0);
-  const boxRef = useRef(null);
+  const boxRef = useRef<HTMLDivElement>(null);
 
-  let animationFrameId;
+  let animationFrameId : number;
 
 
 
@@ -21,7 +24,7 @@ export function BulletRight(props) {
       let boxRect = boxRef.current.getBoundingClientRect();
       // console.log(boxRect.left,boxRect.right," bullet position ");
       let a = boxRect;
-      // console.log(a," a")
+      console.log(a,"right bullets position")
       getPositionBulletRight(a)
     }
 
@@ -29,7 +32,7 @@ export function BulletRight(props) {
 
   }
 
-  function handleKeyDown(e) {
+  function handleKeyDown(e: KeyboardEvent) {
     if (e.code === "ArrowRight") {
       setDoAnimate(true);
       setVisible("normal");
@@ -66,6 +69,11 @@ export function BulletRight(props) {
   return <Box ref={boxRef} id="bulletRight" visible={visible} animate={doAnimate} key={key} />;
 }
 
+type BoxProps = {
+  visible: string;
+  animate: boolean;
+};
+
 const moveLeft = keyframes`
   from {
     right: 0px;
@@ -74,14 +82,16 @@ const moveLeft = keyframes`
     right: 1400px;
   }
 `;
-// ${(props) => (props.visible !== "normal" ? "none" : "normal")};
+
 const Box = styled.div`
-  display: normal;
-  border: 1px solid white;
-  width: 10px;
-  height: 2px;
-  margin-left: 651px;
+  display: ${(props:BoxProps) => (props.visible !== "normal" ? "none" : "normal")};
+  border: 1px solid black;
+  border-radius: 10px 0px 0px 10px;
+  background: black;
+  width: 20px;
+  height: 5px;
+  margin-left: 452px;
   position: relative;
-  bottom: 40px;
-  animation: ${(props) => (props.animate ? moveLeft : "none")} 1s linear;
+  bottom: 92px;
+  animation: ${(props:BoxProps) => (props.animate ? moveLeft : "none")} 1s linear;
 `;

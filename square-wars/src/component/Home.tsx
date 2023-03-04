@@ -8,7 +8,7 @@ const Home = () => {
         <div className='home-main'>
             <div className='home-div'>
 
-                <h1 className='h1'>Sqaure War</h1>
+                <h1 className='h1'>Gun Wars</h1>
                 <button className='btn' onClick={() => navigate("/start-game")}>Start Game</button>
 
             </div>
