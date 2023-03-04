@@ -10,6 +10,7 @@ export function LeftPlayer(props: Props  ) {
 
   const {getPositionLeftPlyr} = props;
   const [position, setPosition] = useState(100);
+  
 
   useEffect(() => {
 
