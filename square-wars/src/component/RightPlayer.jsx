@@ -1,16 +1,20 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import styles from "../styles/LeftPlayer.css";
+import styles from "../styles/RightPlayer.module.scss";
 
 export function RightPlayer(props) {
     const { getPositionRitPlyr } = props;
     const [position, setPosition] = useState(350);
+
 
     useEffect(() => {
         document.addEventListener("keydown", handleMove);
         let ritDiv = document.getElementById("ritPlyr");
         let ritRect = ritDiv.getBoundingClientRect();
         getPositionRitPlyr(ritRect);
+
+
+
         return () => {
             document.removeEventListener("keydown", handleMove);
         };
@@ -27,9 +31,10 @@ export function RightPlayer(props) {
         }
     }
 
-    return (
+    return (<>
         <Box
             id="ritPlyr"
+
             position="relative"
             border="1px solid black"
             bg="white"
@@ -37,7 +42,12 @@ export function RightPlayer(props) {
             h="50px"
             ml="650px"
             mt={position + "px"}
-            // onLoad={handleGetPosition}
-        ></Box>
+        // onLoad={handleGetPosition}
+
+        >
+
+        </Box>
+        
+    </>
     );
 }

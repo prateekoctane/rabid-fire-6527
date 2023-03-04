@@ -1,14 +1,33 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
 
 
 export function BulletLeft(props) {
   
-  const {getPositionBulletLeft} = props;
+  let {getPositionBulletLeft} = props;
 
   const [visible, setVisible] = useState("none");
   const [doAnimate, setDoAnimate] = useState(false);
   const [key, setKey] = useState(0);
+  const boxRef = useRef(null);
+
+  let animationFrameId;
+ 
+
+ 
+  function updateBoxPosition() {
+    
+    if (boxRef.current) {
+      let boxRect = boxRef.current.getBoundingClientRect();
+      // console.log(boxRect.left,boxRect.right," bullet position ");
+      let a = boxRect;
+      // console.log(a," a")
+      getPositionBulletLeft(a)
+    }
+
+    animationFrameId = requestAnimationFrame(updateBoxPosition);
+   
+  }
 
   
   function handleKeyDown(e) {
@@ -16,16 +35,12 @@ export function BulletLeft(props) {
       setDoAnimate(true);
       setVisible("normal");
       setKey(key + 1);
+      updateBoxPosition();
     }
-  }
-  
+  }  
 
   useEffect(() => {
-  
-        let leftBulletDiv = document.getElementById("bulletLeft");
-        let leftBulletRect = leftBulletDiv.getBoundingClientRect();
-        getPositionBulletLeft(leftBulletRect);
-
+   
     setTimeout(() => {
         
         if(visible === "normal"){
@@ -34,13 +49,29 @@ export function BulletLeft(props) {
     }, 1100);
 
     document.addEventListener("keyup", handleKeyDown);
+
     return () => {
       document.removeEventListener("keyup", handleKeyDown);
+      
     };
 
   }, [key]);
 
-  return <Box id="bulletLeft" visible={visible} animate={doAnimate} key={key}/>;
+  // if(visible === "none"){
+  
+  //   cancelAnimationFrame(animationFrameId);
+  //   console.log("cancelled")
+  // }
+
+  useEffect(() => {
+    if (visible === "none") {
+      cancelAnimationFrame(animationFrameId);
+      // console.log("cancelled");
+    }
+  }, [visible]);
+
+
+  return <Box ref={boxRef} id="bulletLeft" visible={visible} animate={doAnimate} key={key}/>;
 }
 
 const moveLeft = keyframes`
@@ -62,6 +93,7 @@ const Box = styled.div`
   bottom: 40px;
   animation: ${(props) => (props.animate ? moveLeft : "none")} 1s linear;
   ${(props) => (props.id ? `id: ${props.id}` : "")};
+  
 `;
 
 
