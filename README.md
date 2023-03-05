@@ -1,7 +1,7 @@
 #  Welcome To Gun-Wars
 <h1>hackathon project</h1>
 
-<h4>Deployed Link: https://square-wars-game.vercel.app/</h4>
+<h4>Deployed Link: https://square-wars-three.vercel.app/</h4>
 <h2>This is a game that we made during the Hackathon using the html, css-animation, javascript, styled-components and typescript.</h2>
 
 ---
