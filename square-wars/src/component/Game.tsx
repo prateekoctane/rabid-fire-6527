@@ -19,7 +19,12 @@ import {
   useDisclosure,
   Button
 } from '@chakra-ui/react';
+import { useOutsideClick } from '@chakra-ui/react';
 import {Position }from "./constant";
+// import { LeftPlayerProps } from './constant'
+
+
+
 
 const Game = () :JSX.Element => {
 
@@ -36,7 +41,15 @@ const Game = () :JSX.Element => {
   const [blastRight, setBlastRight] = useState<string>("none");
   const [blastLeft, setBlastLeft] = useState<string>("none");
   const [showAlert, setShowAlert] = useState<boolean>(false);
-  const [plyr, setPlyr] = useState<string>("")
+  const [plyr, setPlyr] = useState<string>("");
+  const alertRef = useRef(null);
+  const [position, setPosition] = useState<number>(0);
+  const [rightPosition, setRightPosition] = useState<number>(0);
+
+  useOutsideClick({
+    ref: alertRef,
+    handler: () => {restart()},
+  })
 
 
 
@@ -64,12 +77,13 @@ const Game = () :JSX.Element => {
 // console.log(rb,"right bullet")
 
 
+ 
   function restart(){
     setBlastRight("none");
     setBlastLeft("none");
     onClose();
+    // console.log("inside restart")
   }
-
 
   // console.log(lb,"leftbutllet")
 
@@ -103,11 +117,12 @@ const Game = () :JSX.Element => {
 
   return (
     <>
-      {showAlert &&
+      {showAlert && <div  ref={alertRef} >
         <AlertDialog
           isOpen={isOpen}
           leastDestructiveRef={cancelRef}
           onClose={onClose}
+         
         >
           <AlertDialogOverlay>
             <AlertDialogContent>
@@ -128,6 +143,7 @@ const Game = () :JSX.Element => {
             </AlertDialogContent>
           </AlertDialogOverlay>
         </AlertDialog>
+        </div>
       }
       <section className='main-section'>
         <h1>Welcome to Gun-Wars</h1>
@@ -135,19 +151,19 @@ const Game = () :JSX.Element => {
           <div className='divider'>
             <div className='team-name'>
 
-              <LeftPlayer getPositionLeftPlyr={getPositionLeftPlyr} />
-              <BulletLeft getPositionBulletLeft={getPositionBulletLeft} />
-              <Image id="left" display={blastLeft} zIndex="6" w="160px"  position="relative" bottom="150px" left="15px"
-                src="/blast.png" alt="explode" />
+              <LeftPlayer blastLeft={blastLeft} position={position} setPosition={setPosition}  getPositionLeftPlyr={getPositionLeftPlyr} />
+              <BulletLeft position={position}  getPositionBulletLeft={getPositionBulletLeft} />
+              {/* <Image id="left" display="normal" zIndex="6" w="160px" border="1px solid black"  position="relative" bottom={lp.top} left="20px"
+                src="/blast.png" alt="explode" /> */}
 
             </div>
           </div>
           <div className='divider'>
             <div className='team-name'>
-              <RightPlayer getPositionRitPlyr={getPositionRitPlyr} />
-              <BulletRight getPositionBulletRight={getPositionBulletRight} />
-              <Image id="right" display={blastRight} zIndex="6" w="170px" position="relative" bottom="150px" left="400px"
-                src="/blast.png" alt="explode" />
+              <RightPlayer blastRight={blastRight} rightPosition={rightPosition} setRightPosition={setRightPosition}  getPositionRitPlyr={getPositionRitPlyr} />
+              <BulletRight rightPosition={rightPosition} getPositionBulletRight={getPositionBulletRight} />
+              {/* <Image id="right" display={blastRight} zIndex="6" w="170px" position="relative" bottom="120px" left="410px"
+                src="/blast.png" alt="explode" /> */}
 
             </div>
           </div>

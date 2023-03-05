@@ -14,44 +14,46 @@ import {
     useDisclosure,
     Button
 } from '@chakra-ui/react';
-import {Position }from "./constant";
+import { Position } from "./constant";
 
 
- 
-export function Body():JSX.Element {
+
+export function Body(): JSX.Element {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const cancelRef = useRef<HTMLButtonElement|null>(null)
-    const [rp, setRp] = useState<Position>({left: 0, right: 0, top: 0, bottom: 0});
-    const [lb, setLb] = useState<Position>({left: 0, right: 0, top: 0, bottom: 0});
+    const cancelRef = useRef<HTMLButtonElement | null>(null)
+    const [rp, setRp] = useState<Position>({ left: 0, right: 0, top: 0, bottom: 0 });
+    const [lb, setLb] = useState<Position>({ left: 0, right: 0, top: 0, bottom: 0 });
 
-    const [lp, setLp] = useState<Position>({left: 0, right: 0, top: 0, bottom: 0});
-    const [rb, setRb] = useState<Position>({left: 0, right: 0, top: 0, bottom: 0});
+    const [lp, setLp] = useState<Position>({ left: 0, right: 0, top: 0, bottom: 0 });
+    const [rb, setRb] = useState<Position>({ left: 0, right: 0, top: 0, bottom: 0 });
     const [blastRight, setBlastRight] = useState<string>("none");
     const [blastLeft, setBlastLeft] = useState<string>("none");
-    const [showAlert,setShowAlert] = useState<boolean>(false);
-    const [plyr,setPlyr] = useState<string>("")
+    const [showAlert, setShowAlert] = useState<boolean>(false);
+    const [plyr, setPlyr] = useState<string>("");
+    const [position, setPosition] = useState<number>(100);
+    const [rightPosition, setRightPosition] = useState<number>(100);
 
 
 
-    function getPositionRitPlyr(val:Position) {
+    function getPositionRitPlyr(val: Position) {
 
         setRp(val);
     }
     // // console.log(rp,"right player")
 
-    function getPositionBulletLeft(val:Position) {
+    function getPositionBulletLeft(val: Position) {
 
         setLb(val)
     }
 
-    function getPositionLeftPlyr(val:Position) {
+    function getPositionLeftPlyr(val: Position) {
 
         setLp(val);
     }
     // console.log(rp,"right player")
 
-    function getPositionBulletRight(val:Position) {
+    function getPositionBulletRight(val: Position) {
 
         setRb(val)
     }
@@ -61,7 +63,7 @@ export function Body():JSX.Element {
 
     useEffect(() => {
 
-        
+
         if (lb.left < rp.right &&
             lb.right > rp.left &&
             lb.top < rp.bottom &&
@@ -102,11 +104,11 @@ export function Body():JSX.Element {
                 <AlertDialogOverlay>
                     <AlertDialogContent>
                         <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-                           GAME OVER !!!
+                            GAME OVER !!!
                         </AlertDialogHeader>
 
                         <AlertDialogBody>
-                        {plyr} player wins
+                            {plyr} player wins
                         </AlertDialogBody>
 
                         <AlertDialogFooter>
@@ -124,16 +126,16 @@ export function Body():JSX.Element {
 
         <Box w="100vw" h="100vh" borderRight="5px solid white" >
 
-            <LeftPlayer getPositionLeftPlyr={getPositionLeftPlyr} />
-            <BulletLeft getPositionBulletLeft={getPositionBulletLeft} />
+            <LeftPlayer blastLeft={blastLeft} position={position} setPosition={setPosition} getPositionLeftPlyr={getPositionLeftPlyr} />
+            <BulletLeft position={position} getPositionBulletLeft={getPositionBulletLeft} />
             <Image id="left" display={blastLeft} zIndex="3" w="130px" ml="650px" position="relative" bottom="90px" right="35px"
                 src="/blast.png" alt="explode" />
         </Box>
 
         <Box w="100vw" h="100vh" borderLeft="5px solid white" >
 
-            <RightPlayer getPositionRitPlyr={getPositionRitPlyr} />
-            <BulletRight getPositionBulletRight={getPositionBulletRight} />
+            <RightPlayer blastRight={blastRight} rightPosition={rightPosition} setRightPosition={setRightPosition} getPositionRitPlyr={getPositionRitPlyr} />
+            <BulletRight rightPosition={rightPosition} getPositionBulletRight={getPositionBulletRight} />
             <Image id="right" display={blastRight} zIndex="3" w="130px" ml="650px" position="relative" bottom="90px" right="35px"
                 src="/blast.png" alt="explode" />
         </Box>

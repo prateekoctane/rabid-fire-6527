@@ -4,10 +4,11 @@ import {Position }from "./constant";
 
 type Props = {
   getPositionBulletRight: (a: Position) => void;
+  rightPosition:number;
 };
 export function BulletRight(props:Props) {
 
-  const { getPositionBulletRight } = props;
+  const { getPositionBulletRight,rightPosition } = props;
 
   const [visible, setVisible] = useState("none");
   const [doAnimate, setDoAnimate] = useState(false);
@@ -66,12 +67,13 @@ export function BulletRight(props:Props) {
     }
   }, [visible]);
 
-  return <Box ref={boxRef} id="bulletRight" visible={visible} animate={doAnimate} key={key} />;
+  return <Box ref={boxRef} id="bulletRight" rightPosition={rightPosition} visible={visible} animate={doAnimate} key={key} />;
 }
 
 type BoxProps = {
   visible: string;
   animate: boolean;
+  rightPosition: number;
 };
 
 const moveLeft = keyframes`
@@ -92,6 +94,6 @@ const Box = styled.div`
   height: 5px;
   margin-left: 452px;
   position: relative;
-  bottom: 92px;
+  bottom: ${(props:BoxProps) => props.rightPosition + 45 }px;
   animation: ${(props:BoxProps) => (props.animate ? moveLeft : "none")} 1s linear;
 `;

@@ -3,11 +3,12 @@ import styled, { keyframes } from "styled-components";
 import {Position }from "./constant";
 type Props = {
   getPositionBulletLeft: (a: Position) => void;
+  position: number;
 };
 
 export function BulletLeft(props:Props) {
   
-  let {getPositionBulletLeft} = props;
+  let {getPositionBulletLeft,position} = props;
 
   const [visible, setVisible] = useState("none");
   const [doAnimate, setDoAnimate] = useState(false);
@@ -16,7 +17,7 @@ export function BulletLeft(props:Props) {
 
   let animationFrameId:number;
  
-
+  // console.log("position in bullet left",position)
  
   function updateBoxPosition() {
     
@@ -33,16 +34,17 @@ export function BulletLeft(props:Props) {
   }
 
   
-  function handleKeyDown(e:KeyboardEvent) {
-    if (e.code === "Space") {
-      setDoAnimate(true);
-      setVisible("normal");
-      setKey(key + 1);
-      updateBoxPosition();
-    }
-  }  
+  
 
   useEffect(() => {
+    function handleKeyDown(e:KeyboardEvent) {
+      if (e.code === "Space") {
+        setDoAnimate(true);
+        setVisible("normal");
+        setKey(key + 1);
+        updateBoxPosition();
+      }
+    }  
    
     setTimeout(() => {
         
@@ -60,12 +62,7 @@ export function BulletLeft(props:Props) {
 
   }, [key]);
 
-  // if(visible === "none"){
   
-  //   cancelAnimationFrame(animationFrameId);
-  //   console.log("cancelled")
-  // }
-
   useEffect(() => {
     if (visible === "none") {
       cancelAnimationFrame(animationFrameId);
@@ -74,12 +71,13 @@ export function BulletLeft(props:Props) {
   }, [visible]);
 
 
-  return <Box ref={boxRef} id="bulletLeft" visible={visible} animate={doAnimate} key={key}/>;
+  return <Box ref={boxRef} id="bulletLeft" position={position} visible={visible} animate={doAnimate} key={key}/>;
 }
 
 type BoxProps = {
   visible: string;
   animate: boolean;
+  position: number;
 };
 
 const moveLeft = keyframes`
@@ -90,17 +88,18 @@ const moveLeft = keyframes`
     left: 1400px;
   }
 `;
-
+// ${(props:BoxProps) => (props.visible !== "normal" ? "none" : "normal")};
 const Box = styled.div`
-  display: ${(props:BoxProps) => (props.visible !== "normal" ? "none" : "normal")};;
+  display: normal;
   border: 1px solid black;
   border-radius: 0px 10px 10px 0px;
   background: black;
   width: 20px;
   height: 5px;
   margin-left: 89px;
+  margin-bottom:20px;
   position: relative;
-  bottom: 92px;
+  bottom: ${(props:BoxProps) => props.position + 45 }px;
   animation: ${(props:BoxProps) => (props.animate ? moveLeft : "none")} 1s linear;
   ${(props) => (props.id ? `id: ${props.id}` : "")};
   
