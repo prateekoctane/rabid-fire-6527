@@ -2,7 +2,7 @@
 <h1>hackathon project</h1>
 
 <h4>Deployed Link: https://square-wars-game.vercel.app/</h4>
-<h2>This is a game that we made during the Hackathon using the html, css-animation, javscript and typescript.</h2>
+<h2>This is a game that we made during the Hackathon using the html, css-animation, javascript, styled-components and typescript.</h2>
 
 ---
 
@@ -13,9 +13,9 @@ The tech stacks used in this were React, javacript,styled-components and typescr
 
 <h4>Flow of the project:</h4>
 
-On page load the start menu appears which has the details of the keys assigned to left and right player. there is also a start game button. when we click on the start game button it re-directs us to main game page where we can play. 
+On page load the start menu appears which has the details of the keys assigned to left and right player. There is also a start game button. When we click on the start game button it re-directs us to main game page where we can play. 
 
-we have replaced the squares with guns because it looks much better. the up and down movement of the guns is acheived by "on key down" event. the bullet collision is detected by getboundingclientrect() function.  
+we have replaced the squares with guns because it looks much better. The up and down movement of the guns is acheived by "on key down" event. The bullet collision is detected by getboundingclientrect() function.  
 </p>
 
 ---
