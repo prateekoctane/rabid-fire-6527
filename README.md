@@ -11,19 +11,22 @@
 
 The tech stacks used in this were React, javacript,styled-components and typescript. 
 
-Flow of the project:
+<h4>Flow of the project:</h4>
 
 On page load the start menu appears which has the details of the keys assigned to left and right player. there is also a start game button. when we click on the start game button it re-directs us to main game page where we can play. 
 
-we have replaced the squares with guns because it looks much better. the up and down movemnt of the guns is acheived by "on key down" event. the bullet collision is detected by getboundingclientrect() funciton.  
+we have replaced the squares with guns because it looks much better. the up and down movement of the guns is acheived by "on key down" event. the bullet collision is detected by getboundingclientrect() function.  
 </p>
-Team Member:-
-- Rittik Haldar - UI
-- Prateek Bhattacharya - bullet movement & collision detections
-- Saurav Mallik - guns up and down movement
-- Omesh Dubey - made guns UI and hands
 
-used language:-
+---
+
+Team Member:-
+- Rittik Haldar - UI <br />
+- Prateek Bhattacharya - bullet movement & collision detections <br />
+- Saurav Mallik - guns up and down movement <br />
+- Omesh Dubey - made guns UI and hands <br />
+
+Tech Stacks:-
 - React
 - Javascript
 - HTML
