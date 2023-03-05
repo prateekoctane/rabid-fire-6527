@@ -9,7 +9,7 @@
 <h1>Description</h3>
 <p>The basic idea was that 2 squares opposite to each other will try to shoot at each other. The one who manages to shoot the other first wins the game. This idea looked very simple of paper but proved to be very challenging when we started. Firstly we broke down the problem statement in to 4 parts: the UI, the square's movements, hitting of bullet detection and multiplayer functionality.
 
-The tech stacks used in this were React, javacript and typescript. 
+The tech stacks used in this were React, javacript,styled-components and typescript. 
 
 Flow of the project:
 
